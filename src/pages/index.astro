@@ -1,44 +1,33 @@
 ---
 import DashboardLayout from '../layouts/DashboardLayout.astro';
 
-// Aquí simulamos cómo será la carga futura del historial completo.
-const noticias = [
-  {
-    titulo: "Astro v5 llega con grandes mejoras en SSR",
-    categoria: "Tecnología",
-    fecha: "2026-03-26",
-    resumen: "El nuevo framework web reduce el tiempo de renderizado de Nginx y unifica la compilación."
-  },
-  {
-    titulo: "NeuralJira asegura SaaS para Central Cervecera",
-    categoria: "Startups",
-    fecha: "2026-03-25",
-    resumen: "Se aprueba el presupuesto de 1.2M COP/mes para automatizar bodegas con móviles."
-  },
-  {
-    titulo: "Mercado TI en Colombia crece un 18% este trimestre",
-    categoria: "Colombia",
-    fecha: "2026-03-26",
-    resumen: "La demanda de desarrolladores React y Node.js en Bogotá rompe récord por el sector Fintech."
-  }
+// Resumen del inicio
+const categorias = [
+  { nombre: "Tecnología Global", link: "/tecnologia", color: "#8b5cf6", res: "Últimos avances en IA, frameworks (Astro/Next) y big tech." },
+  { nombre: "Ecosistema Colombia", link: "/colombia", color: "#f59e0b", res: "Startups locales, inversión extranjera, Fintech y corporativos." },
+  { nombre: "Startups y VC", link: "/startups", color: "#10b981", res: "Fondos de Venture Capital, YC, rondas semilla." },
+  { nombre: "Mundo y Economía", link: "/mundo", color: "#ef4444", res: "Mercados globales que impactan la tecnología." }
 ];
 ---
 
 <DashboardLayout title="NeuralNews - Inicio">
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-    {noticias.map((news) => (
-      <article style="background: #1e293b; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); border-left: 4px solid #3b82f6;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; align-items: baseline;">
-          <span style="font-size: 0.875rem; text-transform: uppercase; font-weight: 600; color: #93c5fd; letter-spacing: 0.05em;">{news.categoria}</span>
-          <time style="font-size: 0.875rem; color: #64748b;">{news.fecha}</time>
-        </div>
-        <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0 0 0.75rem; color: #f8fafc; line-height: 1.4;">
-          {news.titulo}
-        </h2>
-        <p style="margin: 0; color: #cbd5e1; font-size: 1rem; line-height: 1.6;">
-          {news.resumen}
-        </p>
-      </article>
+  <div style="margin-bottom: 2rem;">
+    <h2 style="color: #f8fafc;">Selecciona una Sección de Inteligencia</h2>
+    <p style="color: #94a3b8;">Navega por las categorías actualizadas diariamente.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+    {categorias.map((cat) => (
+      <a href={cat.link} style="text-decoration: none; color: inherit;">
+        <article style={`background: #1e293b; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); border-left: 4px solid ${cat.color}; transition: transform 0.2s;`}>
+          <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0 0 0.75rem; color: #f8fafc; line-height: 1.4;">
+            {cat.nombre} ↗
+          </h2>
+          <p style="margin: 0; color: #cbd5e1; font-size: 1rem; line-height: 1.6;">
+            {cat.res}
+          </p>
+        </article>
+      </a>
     ))}
   </div>
 </DashboardLayout>
