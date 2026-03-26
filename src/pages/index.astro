@@ -1,49 +1,44 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+
+// Aquí simulamos cómo será la carga futura del historial completo.
+const noticias = [
+  {
+    titulo: "Astro v5 llega con grandes mejoras en SSR",
+    categoria: "Tecnología",
+    fecha: "2026-03-26",
+    resumen: "El nuevo framework web reduce el tiempo de renderizado de Nginx y unifica la compilación."
+  },
+  {
+    titulo: "NeuralJira asegura SaaS para Central Cervecera",
+    categoria: "Startups",
+    fecha: "2026-03-25",
+    resumen: "Se aprueba el presupuesto de 1.2M COP/mes para automatizar bodegas con móviles."
+  },
+  {
+    titulo: "Mercado TI en Colombia crece un 18% este trimestre",
+    categoria: "Colombia",
+    fecha: "2026-03-26",
+    resumen: "La demanda de desarrolladores React y Node.js en Bogotá rompe récord por el sector Fintech."
+  }
+];
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<DashboardLayout title="NeuralNews - Inicio">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+    {noticias.map((news) => (
+      <article style="background: #1e293b; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); border-left: 4px solid #3b82f6;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; align-items: baseline;">
+          <span style="font-size: 0.875rem; text-transform: uppercase; font-weight: 600; color: #93c5fd; letter-spacing: 0.05em;">{news.categoria}</span>
+          <time style="font-size: 0.875rem; color: #64748b;">{news.fecha}</time>
+        </div>
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0 0 0.75rem; color: #f8fafc; line-height: 1.4;">
+          {news.titulo}
+        </h2>
+        <p style="margin: 0; color: #cbd5e1; font-size: 1rem; line-height: 1.6;">
+          {news.resumen}
+        </p>
+      </article>
+    ))}
+  </div>
+</DashboardLayout>

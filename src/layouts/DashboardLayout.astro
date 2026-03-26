@@ -1,0 +1,31 @@
+---
+title: "NeuralNews Dashboard"
+description: "Dashboard de noticias tecnológicas, locales y globales."
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{Astro.props.title}</title>
+    <style is:global>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background-color: #0f172a;
+        color: #f8fafc;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header style="background: #1e293b; padding: 1.5rem; text-align: center; border-bottom: 2px solid #3b82f6;">
+      <h1 style="margin: 0; font-size: 2rem; font-weight: bold; color: #60a5fa;">NeuralNews 📡</h1>
+      <p style="margin: 0.5rem 0 0; color: #94a3b8;">Tu inteligencia diaria de Tech, Startups y el Mundo.</p>
+    </header>
+    <main style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+      <slot />
+    </main>
+  </body>
+</html>
