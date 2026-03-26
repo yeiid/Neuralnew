@@ -1,0 +1,33 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+
+const noticiasColombia = [
+  { titulo: "La DIAN oficializa facturación cripto B2B", fecha: "2026-03-26", resumen: "Empresas pueden liquidar impuestos con stablecoins." },
+  { titulo: "Ruta N levanta fondo de 500M USD para IA", fecha: "2026-03-25", resumen: "Startups de analítica en Medellín recibirán el 40%." },
+  { titulo: "Claro Colombia despliega red 6G corporativa", fecha: "2026-03-24", resumen: "Puertos y logística reducen latencia a 1ms." },
+  { titulo: "Central Cervecera (ADN) invierte en SaaS de bodegas", fecha: "2026-03-23", resumen: "Optimización de stock con tecnologías móviles como InvertarioADN reduce merma un 15%." },
+  { titulo: "El Sena forma 100k desarrolladores Go y Rust", fecha: "2026-03-22", resumen: "Pacto del gobierno con Microsoft para cerrar la brecha." },
+  { titulo: "Fintech 'Plata' entra al mercado con neobanco C2C", fecha: "2026-03-21", resumen: "La competencia de Nequi sin comisiones interbancarias." },
+  { titulo: "Bavaria lanza su propia app blockchain", fecha: "2026-03-20", resumen: "Seguimiento de cerveza desde la siembra hasta la tienda." },
+  { titulo: "Platzi compra startup colombiana 'EdTech Coder'", fecha: "2026-03-19", resumen: "Expansión en educación inmersiva VR." },
+  { titulo: "Rappi integra compra de acciones en su app", fecha: "2026-03-18", resumen: "Usuarios podrán invertir en la bolsa colombiana en un clic." },
+  { titulo: "Bogotá instala parque de servidores refrigerados por agua", fecha: "2026-03-17", resumen: "Para minería de datos y hostings 100% renovables." }
+];
+---
+<DashboardLayout title="Noticias Colombia - NeuralNews">
+  <div style="margin-bottom: 2rem;">
+    <a href="/" style="color: #60a5fa; text-decoration: none;">← Volver al Home</a>
+    <h1 style="color: #f8fafc;">🇨🇴 Ecosistema Colombia</h1>
+    <p style="color: #94a3b8;">Las 10 movidas clave de Startups y Tech local.</p>
+  </div>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+    {noticiasColombia.map((news) => (
+      <article style="background: #1e293b; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #f59e0b;">
+        <time style="font-size: 0.8rem; color: #64748b;">{news.fecha}</time>
+        <h3 style="margin: 0.5rem 0; color: #e2e8f0;">{news.titulo}</h3>
+        <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.5;">{news.resumen}</p>
+      </article>
+    ))}
+  </div>
+</DashboardLayout>

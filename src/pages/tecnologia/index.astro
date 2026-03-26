@@ -1,0 +1,34 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+
+// Datos estáticos/dinámicos futuros de Tecnología Global
+const noticiasTecnologia = [
+  { titulo: "OpenAI lanza GPT-6 con razonamiento simbólico avanzado", fecha: "2026-03-26", resumen: "La IA ahora resuelve matemáticas puras en 0.2s." },
+  { titulo: "Astro supera a Next.js en Enterprise adoption", fecha: "2026-03-26", resumen: "Las top Fortune 500 están migrando sus landing pages a Islands Architecture." },
+  { titulo: "TS-Native: Node 24 elimina la necesidad de tsc", fecha: "2026-03-25", resumen: "Node ejecuta TypeScript nativo sin compiladores externos." },
+  { titulo: "NVIDIA anuncia nuevo chip de inferencia cuántica", fecha: "2026-03-25", resumen: "Reduce el costo de tokens en un 90% para modelos locales." },
+  { titulo: "Europa prohíbe el uso de Cookies de rastreo", fecha: "2026-03-24", resumen: "La web migra a Local-First Analytics." },
+  { titulo: "Llama 4: Open Source alcanza el nivel de GPT-4", fecha: "2026-03-24", resumen: "Meta libera su modelo de 400B parámetros." },
+  { titulo: "Apple saca su primer casco AR 'asequible'", fecha: "2026-03-23", resumen: "Vision Air costará 999 USD enfocándose en educación." },
+  { titulo: "Google unifica Gemini y Búsqueda en un solo producto", fecha: "2026-03-23", resumen: "Los links tradicionales desaparecen de la primera página." },
+  { titulo: "El fin de React: Nuevo framework 'SolidJS UI'", fecha: "2026-03-22", resumen: "Framework sin Virtual DOM domina las encuestas." },
+  { titulo: "Rust entra oficialmente al kernel de Windows", fecha: "2026-03-22", resumen: "Microsoft sigue los pasos de Linux para mayor seguridad." }
+];
+---
+<DashboardLayout title="Tecnología Global - NeuralNews">
+  <div style="margin-bottom: 2rem;">
+    <a href="/" style="color: #60a5fa; text-decoration: none;">← Volver al Home</a>
+    <h1 style="color: #f8fafc;">🌍 Tecnología Global</h1>
+    <p style="color: #94a3b8;">Las 10 noticias más impactantes de la industria tech.</p>
+  </div>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+    {noticiasTecnologia.map((news) => (
+      <article style="background: #1e293b; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #8b5cf6;">
+        <time style="font-size: 0.8rem; color: #64748b;">{news.fecha}</time>
+        <h3 style="margin: 0.5rem 0; color: #e2e8f0;">{news.titulo}</h3>
+        <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.5;">{news.resumen}</p>
+      </article>
+    ))}
+  </div>
+</DashboardLayout>
