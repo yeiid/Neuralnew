@@ -3,7 +3,7 @@ import DashboardLayout from '../../layouts/DashboardLayout.astro';
 import { getCollection } from 'astro:content';
 
 const todasLasNoticias = await getCollection('news');
-const noticiasTecnologia = todasLasNoticias.filter(n => n.data.category === 'Tecnologia').sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const noticiasTecnologia = todasLasNoticias.filter(n => n.data.category.toLowerCase().includes('tecnolog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 <DashboardLayout title="Tecnología Global - NeuralNews">
   <div style="margin-bottom: 2rem;">
