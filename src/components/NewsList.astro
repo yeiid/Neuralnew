@@ -1,0 +1,90 @@
+---
+import NewsCard from './NewsCard.astro';
+import Badge from './Badge.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	posts: any[];
+}
+
+const { title, description, posts } = Astro.props;
+---
+
+<div class="list-container">
+	<header class="list-header">
+		<Badge variant="outline">Categoría</Badge>
+		<h1 class="list-title">{title}</h1>
+		<p class="list-description">{description}</p>
+	</header>
+
+	{posts.length > 0 ? (
+		<div class="news-grid">
+			{posts.map((post) => (
+				<NewsCard post={post} />
+			))}
+		</div>
+	) : (
+		<div class="empty-state">
+			<p>No hay noticias en esta categoría por el momento.</p>
+			<a href="/" class="back-home">Explorar otras categorías</a>
+		</div>
+	)}
+</div>
+
+<style>
+	.list-container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.list-header {
+		margin-bottom: 4rem;
+		text-align: center;
+	}
+
+	.list-title {
+		font-size: clamp(2.5rem, 6vw, 4rem);
+		font-weight: 800;
+		margin: 1rem 0;
+		letter-spacing: -0.02em;
+	}
+
+	.list-description {
+		font-size: 1.25rem;
+		color: var(--text-secondary);
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.news-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		gap: 2.5rem;
+	}
+
+	.empty-state {
+		text-align: center;
+		padding: 5rem 0;
+		background: var(--bg-card);
+		border-radius: var(--radius);
+		border: 1px dashed var(--border);
+	}
+
+	.empty-state p {
+		color: var(--text-secondary);
+		margin-bottom: 1.5rem;
+	}
+
+	.back-home {
+		color: var(--accent-light);
+		font-weight: 600;
+		text-decoration: underline;
+	}
+
+	@media (max-width: 640px) {
+		.news-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

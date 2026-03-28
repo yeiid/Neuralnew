@@ -1,0 +1,19 @@
+---
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import { getCollection } from 'astro:content';
+import NewsList from '../components/NewsList.astro';
+
+const allNews = await getCollection('news');
+const sortedPosts = allNews.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<DashboardLayout 
+	title="Todas las Noticias - NeuralNews" 
+	description="Archivo completo de noticias, análisis y reportes de NeuralNews."
+>
+	<NewsList 
+		title="Archivo de Noticias" 
+		description="Explora todo nuestro contenido histórico y las actualizaciones más recientes."
+		posts={sortedPosts}
+	/>
+</DashboardLayout>

@@ -1,31 +1,183 @@
 ---
-title: "NeuralNews Dashboard"
-description: "Dashboard de noticias tecnológicas, locales y globales."
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Dashboard de noticias tecnológicas, locales y globales." } = Astro.props;
 ---
 
+<!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{Astro.props.title}</title>
-    <style is:global>
-      body {
-        font-family: system-ui, -apple-system, sans-serif;
-        background-color: #0f172a;
-        color: #f8fafc;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <header style="background: #1e293b; padding: 1.5rem; text-align: center; border-bottom: 2px solid #3b82f6;">
-      <h1 style="margin: 0; font-size: 2rem; font-weight: bold; color: #60a5fa;">NeuralNews 📡</h1>
-      <p style="margin: 0.5rem 0 0; color: #94a3b8;">Tu inteligencia diaria de Tech, Startups y el Mundo.</p>
-    </header>
-    <main style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
-      <slot />
-    </main>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+		<ClientRouter />
+	</head>
+	<body>
+		<div class="app-container">
+			<header class="main-header">
+				<nav class="nav-container">
+					<a href="/" class="logo">
+						<span class="logo-icon">📡</span>
+						<span class="logo-text">NeuralNews</span>
+					</a>
+					<ul class="nav-links">
+						<li><a href="/tecnologia">Tecnología</a></li>
+						<li><a href="/colombia">Colombia</a></li>
+						<li><a href="/startups">Startups</a></li>
+						<li><a href="/mundo">Mundo</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<main class="content-wrapper">
+				<slot />
+			</main>
+
+			<footer class="main-footer">
+				<div class="footer-content">
+					<p>&copy; {new Date().getFullYear()} NeuralNews. Inteligencia accionable diaria.</p>
+				</div>
+			</footer>
+		</div>
+
+		<style is:global>
+			:root {
+				--accent: #3b82f6;
+				--accent-light: #60a5fa;
+				--accent-dark: #1d4ed8;
+				--bg-main: #09090b;
+				--bg-card: #18181b;
+				--bg-nav: rgba(9, 9, 11, 0.8);
+				--text-primary: #fafafa;
+				--text-secondary: #a1a1aa;
+				--text-muted: #71717a;
+				--border: #27272a;
+				--radius: 12px;
+				--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+				--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+			}
+
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			html {
+				font-family: 'Inter', system-ui, sans-serif;
+				background: var(--bg-main);
+				color: var(--text-primary);
+				scroll-behavior: smooth;
+			}
+
+			body {
+				min-height: 100vh;
+				line-height: 1.6;
+			}
+
+			h1, h2, h3, h4, h5, h6 {
+				font-family: 'Outfit', sans-serif;
+				color: var(--text-primary);
+				line-height: 1.2;
+			}
+
+			a {
+				color: inherit;
+				text-decoration: none;
+				transition: color 0.2s ease;
+			}
+
+			.app-container {
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+			}
+
+			.main-header {
+				position: sticky;
+				top: 0;
+				z-index: 50;
+				background: var(--bg-nav);
+				backdrop-filter: blur(12px);
+				border-bottom: 1px solid var(--border);
+				padding: 1rem 0;
+			}
+
+			.nav-container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 1.5rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.logo {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				font-size: 1.5rem;
+				font-weight: 800;
+				font-family: 'Outfit', sans-serif;
+				color: var(--accent-light);
+			}
+
+			.nav-links {
+				display: flex;
+				gap: 2rem;
+				list-style: none;
+			}
+
+			.nav-links a {
+				font-weight: 500;
+				color: var(--text-secondary);
+				font-size: 0.95rem;
+			}
+
+			.nav-links a:hover {
+				color: var(--accent-light);
+			}
+
+			.content-wrapper {
+				flex: 1;
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 3rem 1.5rem;
+				width: 100%;
+			}
+
+			.main-footer {
+				border-top: 1px solid var(--border);
+				padding: 2rem 0;
+				margin-top: 4rem;
+				background: var(--bg-card);
+			}
+
+			.footer-content {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 1.5rem;
+				text-align: center;
+				color: var(--text-muted);
+				font-size: 0.875rem;
+			}
+
+			@media (max-width: 768px) {
+				.nav-links {
+					display: none; /* Simplification for now, could be a hamburger menu */
+				}
+			}
+		</style>
+	</body>
 </html>

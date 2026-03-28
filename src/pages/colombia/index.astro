@@ -1,26 +1,21 @@
 ---
 import DashboardLayout from '../../layouts/DashboardLayout.astro';
 import { getCollection } from 'astro:content';
+import NewsList from '../../components/NewsList.astro';
 
-const todasLasNoticias = await getCollection('news');
-const noticiasColombia = todasLasNoticias.filter(n => n.data.category.toLowerCase().includes('colombia')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const allNews = await getCollection('news');
+const colombiaPosts = allNews
+	.filter(post => post.data.category.toLowerCase().includes('colombia'))
+	.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
-<DashboardLayout title="Ecosistema Colombia - NeuralNews">
-  <div style="margin-bottom: 2rem;">
-    <a href="/" style="color: #60a5fa; text-decoration: none;">← Volver al Home</a>
-    <h1 style="color: #f8fafc;">🇨🇴 Ecosistema Colombia</h1>
-    <p style="color: #94a3b8;">Startups locales, inversión extranjera y corporativos.</p>
-  </div>
-  
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-    {noticiasColombia.map((news) => (
-      <a href={`/noticias/${news.id}`} style="text-decoration: none; color: inherit;">
-        <article style="background: #1e293b; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #f59e0b; transition: transform 0.2s;">
-          <time style="font-size: 0.8rem; color: #64748b;">{news.data.pubDate.toISOString().split('T')[0]}</time>
-          <h3 style="margin: 0.5rem 0; color: #e2e8f0;">{news.data.title}</h3>
-          <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.5;">{news.data.description}</p>
-        </article>
-      </a>
-    ))}
-  </div>
+
+<DashboardLayout 
+	title="Ecosistema Colombia - NeuralNews" 
+	description="Noticias sobre startups, tecnología e innovación en Colombia."
+>
+	<NewsList 
+		title="Ecosistema Colombia" 
+		description="El pulso de la innovación y el emprendimiento en el territorio colombiano."
+		posts={colombiaPosts}
+	/>
 </DashboardLayout>

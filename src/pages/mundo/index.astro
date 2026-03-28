@@ -1,26 +1,21 @@
 ---
 import DashboardLayout from '../../layouts/DashboardLayout.astro';
 import { getCollection } from 'astro:content';
+import NewsList from '../../components/NewsList.astro';
 
-const todasLasNoticias = await getCollection('news');
-const noticiasMundo = todasLasNoticias.filter(n => n.data.category.toLowerCase().includes('mundo') || n.data.category.toLowerCase().includes('econom')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const allNews = await getCollection('news');
+const mundoPosts = allNews
+	.filter(post => post.data.category.toLowerCase().includes('mundo') || post.data.category.toLowerCase().includes('econom'))
+	.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
-<DashboardLayout title="Mundo y Economía - NeuralNews">
-  <div style="margin-bottom: 2rem;">
-    <a href="/" style="color: #60a5fa; text-decoration: none;">← Volver al Home</a>
-    <h1 style="color: #f8fafc;">🌐 Mundo y Economía</h1>
-    <p style="color: #94a3b8;">Mercados globales que impactan la tecnología.</p>
-  </div>
-  
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-    {noticiasMundo.map((news) => (
-      <a href={`/noticias/${news.id}`} style="text-decoration: none; color: inherit;">
-        <article style="background: #1e293b; padding: 1.5rem; border-radius: 8px; border-top: 4px solid #ef4444; transition: transform 0.2s;">
-          <time style="font-size: 0.8rem; color: #64748b;">{news.data.pubDate.toISOString().split('T')[0]}</time>
-          <h3 style="margin: 0.5rem 0; color: #e2e8f0;">{news.data.title}</h3>
-          <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.5;">{news.data.description}</p>
-        </article>
-      </a>
-    ))}
-  </div>
+
+<DashboardLayout 
+	title="Mundo y Economía - NeuralNews" 
+	description="Mercados globales, macroeconomía y su impacto en el sector tecnológico."
+>
+	<NewsList 
+		title="Mundo y Economía" 
+		description="Análisis global de las tendencias económicas que definen el rumbo del mercado."
+		posts={mundoPosts}
+	/>
 </DashboardLayout>

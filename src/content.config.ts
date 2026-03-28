@@ -10,6 +10,9 @@ const news = defineCollection({
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
 		category: z.string(),
+		author: z.string().default('NeuralNews Team'),
+		tags: z.array(z.string()).default([]),
+		readingTime: z.string().optional(),
 	}),
 });
 
